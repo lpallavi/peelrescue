@@ -1,0 +1,111 @@
+{{template "header"}}
+<link rel="stylesheet" href="/assets/styles.css">
+<body>
+<div class="topnav">
+    <a href="/buyer">Home</a>
+    <a href="/buyer/findoneitem">Search</a>
+    <a href="/buyer/buyercart">View Cart</a>
+    <a href="/buyer/profile">View Profile</a>
+    <a href="/logout">Log Out</a>
+</div> 
+{{template "spacers"}}
+
+{{if eq .Operation "checkoutsuccess"}}
+    {{range $index, $element := .Mainmessage}}
+        {{if eq $index 0}}
+            <h3>{{$element}}</h3>
+        {{else}}    
+            <div>{{$element}}</div>
+        {{end}}
+    {{end}}
+{{end}}
+
+{{if eq .Operation "viewcart"}}
+    {{if eq .Totalcost "0.00"}}
+        <h1> Cart is empty , please add items to cart first! </h1>
+        <form method="post" action="/buyer" style="display:inline-block;" >        
+            <input type="hidden" name="add_more" value="add">
+            <button class="button" type="submit" name="action" value="add_more">Add More Items</button>
+        </form>
+    {{else}}    
+        {{range $index, $element := .Mainmessage}}
+            {{if eq $index 0}}
+                <h3>{{$element}}</h3>
+            {{else}}    
+                <div>{{$element}}</div>
+            {{end}}
+        {{end}}
+
+        <form method="post" action="" style="display:inline-block;" >        
+            <input type="hidden" name="add_more" value="add">
+            <button class="button" type="submit" name="action" value="add_more">Add More Items</button>
+        </form>
+
+        <form method="post" action="" style="display:inline-block;">        
+            <input type="hidden" name="reset" value="reset">
+            <button class="button" type="submit" name="action" value="reset">Empty Cart</button>
+        </form>
+
+        <form method="post" action="" style="display:inline-block;">        
+            <input type="hidden" name="checkout" value="checkout">
+            <button  class="button" type="submit" name="action" value="checkout">Checkout</button>
+        </form>
+
+        {{ $itemcost := .CostPerItem }}
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Item name</th>
+                    <th>Quantity (In kgs)</th>
+                    <th>Cost (In SGD)</th>
+                    <th>Seller name</th>
+                    <th>Cost per Product</th>
+                </tr>
+                {{range $index, $element := .Items}}
+                    <tr>
+                        <td>
+                            {{if eq $element.Item "apple"}}
+                                <img src="/assets/apple.jpg" alt="apple" border=0 height=30 width=40></img>
+
+                            {{else if eq $element.Item "orange"}}
+                                <img src="/assets/orange.jpg" alt="orange" border=0 height=30 width=40></img>
+
+                            {{else if eq $element.Item "lemon"}}
+                                <img src="/assets/lemon.jpg" alt="lemon" border=0 height=30 width=40></img>
+
+                            {{else if eq $element.Item "grapefruit"}}
+                                <img src="/assets/grapefruit.jpg" alt="grapefruit" border=0 height=30 width=40></img>
+
+                            {{else if eq $element.Item "banana"}}
+                                <img src="/assets/banana.jpg" alt="banana" border=0 height=30 width=40></img>
+
+                            {{else if eq $element.Item "avacado"}}
+                                <img src="/assets/avacado.jpg" alt="avacado" border=0 height=30 width=40></img>
+
+                            {{else if eq $element.Item "kiwi"}}
+                                <img src="/assets/kiwi.jpg" alt="kiwi" border=0 height=30 width=40></img>
+
+                            {{else if eq $element.Item "watermelon"}}
+                                <img src="/assets/watermelon.jpg" alt="watermelon" border=0 height=30 width=40></img>
+
+                            {{end}}
+                        </td>
+                        <td>{{$element.Item}}</td>
+                        <td>{{$element.Quantity}}</td>
+                        <td>{{$element.Cost}}</td>
+                        <td>{{$element.Username}}</td>
+                        <td>
+                            {{index $itemcost $index}}
+                        </td>    
+                    </tr>
+                {{end}}
+            </table>
+
+        {{if .Totalcost}}
+            <h3> Total Cost : ${{.Totalcost}} </h3>
+        {{end}}
+    {{end}}    
+{{end}}
+
+</body>
+</html>

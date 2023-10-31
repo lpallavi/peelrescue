@@ -1,0 +1,22 @@
+{{template "header"}}
+<body>
+{{template "spacers"}}
+
+<h3>Please login to your account</h3>
+<h4>Or <a href="/signup">Signup Now</a> if you do not have an account</h4>
+<br>
+{{range $index, $element := .}}
+    {{if eq $index 0}}
+        <div id="warning"><span>{{$element}}</span></div>
+    {{else}}    
+        <div>{{$element}}</div>
+    {{end}}
+{{end}}
+<form method="post" enctype="multipart/form-data" autocomplete="off">
+    <input type="text" autocomplete="off" name="username" placeholder="username"><br><br>
+    <input type="password" autocomplete="off" name="password" placeholder="password"><br><br>
+    <input type="hidden" name="login" value="login"><br>
+    <button class="button" type="submit" value="login">Login</button>
+</form>
+</body>
+</html>

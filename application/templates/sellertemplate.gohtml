@@ -1,0 +1,151 @@
+{{template "header"}}
+<link rel="stylesheet" href="/assets/styles.css">
+<body>
+<div class="topnav">
+    <a href="/seller">Home</a>
+    <a href="/seller/additem">Add an item</a>
+    <a href="/seller/updateitem">Update an item</a>
+    <a href="/seller/deleteitem">Delete an item</a>
+    <a href="/seller/profile">View Profile</a>
+    <a href="/logout">Log Out</a>
+</div> 
+{{template "spacers"}}
+
+{{if .Sellername}}
+<div id="seller"><span>Hello {{.Sellername}}</span></div>
+{{end}} 
+
+{{if eq .Operation "profile"}}
+    <h1> PROFILE : </h1>
+{{end}}
+
+{{range $index, $element := .Mainmessage}}
+    {{if eq $index 0}}
+        <h3>{{$element}}</h3>
+    {{else}}    
+        <div>{{$element}}</div>
+    {{end}}
+{{end}}
+
+{{if eq .Operation "view"}}
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Item name</th>
+            <th>Quantity (In kgs)</th>
+            <th>Cost (In SGD)</th>
+        </tr>
+        {{range $index, $element := .Selleritems}}
+            <tr>
+                <td>
+                    {{if eq $element.Item "apple"}}
+                        <img src="/assets/apple.jpg" alt="apple" border=0 height=30 width=40></img>
+                    
+                    {{else if eq $element.Item "orange"}}
+                        <img src="/assets/orange.jpg" alt="orange" border=0 height=30 width=40></img>
+                    
+                    {{else if eq $element.Item "lemon"}}
+                        <img src="/assets/lemon.jpg" alt="lemon" border=0 height=30 width=40></img>
+                    
+                    {{else if eq $element.Item "grapefruit"}}
+                        <img src="/assets/grapefruit.jpg" alt="grapefruit" border=0 height=30 width=40></img>
+                    
+                    {{else if eq $element.Item "banana"}}
+                        <img src="/assets/banana.jpg" alt="banana" border=0 height=30 width=40></img>
+                   
+                    {{else if eq $element.Item "avacado"}}
+                        <img src="/assets/avacado.jpg" alt="avacado" border=0 height=30 width=40></img>
+ 
+                    {{else if eq $element.Item "kiwi"}}
+                        <img src="/assets/kiwi.jpg" alt="kiwi" border=0 height=30 width=40></img>
+                    
+                    {{else if eq $element.Item "watermelon"}}
+                        <img src="/assets/watermelon.jpg" alt="watermelon" border=0 height=30 width=40></img>
+
+                    {{end}}
+                </td>
+                <td>{{$element.Item}}</td>
+                <td>{{$element.Quantity}}</td>
+                <td>{{$element.Cost}}</td>
+            </tr>
+        {{end}}
+    </table>
+{{end}}
+
+{{if eq .Operation "add"}}
+    <form method="post" action="">
+        <label for="fruit">Choose Fruit Peel:</label>
+            <select id="fruit" name="fruit" required>
+                <option value="apple">Apple</option>
+                <option value="avacado">Avacado</option>
+                <option value="banana">Banana</option>
+                <option value="grapefruit">Grapefruit</option>
+                <option value="kiwi">Kiwi</option>
+                <option value="lemon">Lemon</option>
+                <option value="orange">Orange</option>
+                <option value="watermelon">Watermelon</option>
+            </select> 
+
+        <label for="quantity">Quantity in kgs (between 1 and 50):</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="50" required>
+
+        <label for="cost">Cost in SGD :</label>
+            <input type="number" step=0.05 id="cost" name="cost" min="1" max="50" required>
+ 
+        <input type="hidden" name="additem" value=additem>
+        <button class="button" type="submit" name="action" value="additem">Add Item</button>
+    </form>
+
+{{end}}
+
+{{if eq .Operation "update"}}
+    <form method="post" action="">
+        <label for="fruit">Choose Fruit Peel:</label>
+            <select id="fruit" name="fruit" required>
+                <option value="apple">Apple</option>
+                <option value="avacado">Avacado</option>
+                <option value="banana">Banana</option>
+                <option value="grapefruit">Grapefruit</option>
+                <option value="kiwi">Kiwi</option>
+                <option value="lemon">Lemon</option>
+                <option value="orange">Orange</option>
+                <option value="watermelon">Watermelon</option>
+            </select> 
+
+        <label for="quantity">Quantity in kgs (between 1 and 50):</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="50" required>
+
+        <label for="cost">Cost in SGD :</label>
+            <input type="number" step=0.05 id="cost" name="cost" min="1" max="50" required>
+ 
+        <input type="hidden" name="updateitem" value=updateitem>
+        <button type="submit" name="action" value="updateitem">Update Item</button>
+    </form>
+
+{{end}}
+
+{{if eq .Operation "delete"}}
+    <form method="post" action="">
+        <label for="fruit">Choose Fruit Peel:</label>
+            <select id="fruit" name="fruit" required>
+                <option value="apple">Apple</option>
+                <option value="avacado">Avacado</option>
+                <option value="banana">Banana</option>
+                <option value="grapefruit">Grapefruit</option>
+                <option value="kiwi">Kiwi</option>
+                <option value="lemon">Lemon</option>
+                <option value="orange">Orange</option>
+                <option value="watermelon">Watermelon</option>
+            </select> 
+ 
+        <input type="hidden" name="deleteitem" value=deleteitem>
+        <button type="submit" name="action" value="deleteitem">Delete Item</button>
+    </form>
+{{end}}
+
+
+<br>
+
+
+</body>
+</html>

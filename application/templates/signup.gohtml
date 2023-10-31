@@ -1,0 +1,74 @@
+{{template "header"}}
+<body>
+{{template "spacers"}}
+<h2>Please signup for a new account or <a href="/login">Login</a></h2>
+
+{{if .Mainmessage}}
+        <div id="warning"><span>{{.Mainmessage}}</span> </div>    
+{{end}} 
+<br>
+
+<form method="POST" enctype="multipart/form-data" autocomplete="off" >
+    {{if .Fullname}}
+        <div id="warning"><span>{{.Fullname}}</span> </div>    
+    {{end}}    
+    <label class="required" for="fullname">Full Name: </label>
+    <input type="text" autocomplete="off" id="fullname" name="fullname" placeholder="Real name" required>
+    <br>
+    <br>
+    {{if .Username}}
+        <div id="warning"><span>{{.Username}}</span> </div>    
+    {{end}}    
+    <label class="required" for="username">Username: </label>
+    <input type="text" autocomplete="off" id="username" name="username" placeholder="Login id" required>
+    <br>
+    <br>
+    {{if .Password}}
+        <div id="warning"><span>{{.Password}}</span> </div>    
+    {{end}}    
+    <label class="required" for="password">Password: </label>
+    <input type="password" autocomplete="off" id="password" name="password" placeholder="Login password" min="5" max="16" required>
+    <br>
+    <br>
+    {{if .Phone}}
+        <div id="warning"><span>{{.Phone}}</span> </div>    
+    {{end}}    
+    <label class="required" for="phone">Phone: +65-</label>
+    <input type="tel" autocomplete="off" id="phone" name="phone" placeholder="8-digit phone number" pattern="[1-9]{1}[0-9]{7}" required>
+    <br>
+    <br>
+    {{if .Email}}
+        <div id="warning"><span>{{.Email}}</span> </div>    
+    {{end}}    
+    <label class="required" for="email">Email: </label>
+    <input type="email" autocomplete="off" id="email" name="email" placeholder="Valid email" >
+    <br>
+    <br>
+    {{if .Address}}
+        <div id="warning"><span>{{.Address}}</span> </div>    
+    {{end}}    
+    <label class="required" for="address">Address: </label>
+    <input type="text" autocomplete="off" id="address" name="address" placeholder="Postal address">
+    <br>
+    <br>
+    <input type="radio" id="buyer" name="isbuyer" inline value="true">
+    <label for="buyer">Buyer</label>
+    <input type="radio" id="seller" name="isbuyer" inline checked value="false">
+    <label for="seller">Seller</label>
+    <br>
+    <br>
+    <div id="warning"><span> * - All fields are required </span> </div>    
+    <br>
+    <form method="post" enctype="multipart/form-data" style="display:inline-block;"> 
+        <input type="hidden" name="signup" value="signup">
+        <button class="button" type="submit" value="signup">Sign Up</button>
+    </form>
+    
+    <form method="post" enctype="multipart/form-data" style="display:inline-block;"> 
+        <input type="hidden" name="reset" value="reset">
+        <button class="button" type="submit" value="reset">Reset</button>
+    </form>
+</form>
+
+</body>
+</html>
