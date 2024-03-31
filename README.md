@@ -52,4 +52,4 @@ o
 1.	sellerAPI.go – The file contains all functions to handler HTTP requests such as POST/GET/PUT AND DELETE
 2.	sellerAPIdb.go – This file contains functions to interface with DB maintaining seller items
 
-Read PeelRescue-ProjectGoLive.docx for more details.
+
